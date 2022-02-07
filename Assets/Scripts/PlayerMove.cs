@@ -10,10 +10,14 @@ public class PlayerMove : MonoBehaviour
     GrapplingHook grappling;
 
     public float moveSpeed;
-    private bool isJump;
+    public bool isJump;
+
+    public int jumpCount;
+    public int currentCount;
     // Start is called before the first frame update
     void Start()
     {
+        currentCount = jumpCount;
         input = GetComponent<PlayerInput>();
         rigid = GetComponent<Rigidbody2D>();
         grappling = GetComponent<GrapplingHook>();
@@ -22,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(input.isJump) {
+        if(input.isJump ) {
             isJump = true;
         }
 
@@ -39,11 +43,13 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate() {
         
-        if(isJump) {
+        if(isJump && currentCount > 0) {
+            currentCount--;
             rigid.velocity = Vector2.zero;
             rigid.AddForce(Vector2.up * 10 , ForceMode2D.Impulse);
         }
-
         isJump = false;
+        
+
     }
 }
