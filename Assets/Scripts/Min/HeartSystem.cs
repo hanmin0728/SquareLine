@@ -4,9 +4,14 @@ using UnityEngine.UI;
 using UnityEngine;
 public class HeartSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject heart;
-    [SerializeField] private Transform trans;
-    [SerializeField] private GameObject[] objects;
+    [SerializeField] 
+    private GameObject heart;
+
+    [SerializeField]
+    private Transform trans;
+
+    [SerializeField] 
+    private GameObject[] objects;
     public void Set(int _maxHp)
     {
         objects = new GameObject[_maxHp];

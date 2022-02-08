@@ -12,7 +12,15 @@ public class Pl : MonoBehaviour
     {
         heartSystem.Set(maxHp);
     }
-  
+    public void Heal(int amount)
+    {
+        curHp += amount;
+        if (curHp >= maxHp)
+        {
+            curHp = maxHp;
+        }
+        heartSystem.Heart(curHp);
+    }
     public void Damage(int damage)
     {
         curHp -= damage;
