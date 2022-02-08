@@ -30,8 +30,9 @@ public class GrapplingHook : MonoBehaviour
     public float reHookDelay;
    
     private void Awake() {
-        input = GetComponent<PlayerInput>();
         move = GetComponent<PlayerMove>();
+        input = GetComponent<PlayerInput>();
+
     }
 
     private void Start() {
@@ -44,6 +45,9 @@ public class GrapplingHook : MonoBehaviour
         line.useWorldSpace = true; //월드좌표를 기준으로 화면에 그려지게됨
         isAttach = false;
     }
+
+
+    //개인에 가까운것
 
     private void Update() {
         if(input.isJump) {
@@ -91,8 +95,9 @@ public class GrapplingHook : MonoBehaviour
                 hook.gameObject.SetActive(false);
             }
         } else if (isAttach ) {
-
             move.currentCount = move.jumpCount;
+       
+
             if (reHookLastTime + reHookDelay < Time.time && (isMouse || isJump)) {
 
                 reHookLastTime = Time.time;
@@ -103,7 +108,7 @@ public class GrapplingHook : MonoBehaviour
                 hook.gameObject.SetActive(false);
             }
 
-
+            
         }
 
         isJump = false;
