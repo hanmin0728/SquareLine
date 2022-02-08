@@ -8,11 +8,13 @@ public class Spawner : MonoBehaviour
     public GameObject prefabRing;
     public GameObject RingSign;
     SpriteRenderer circleSprtie;
-
+ 
     private float xRange;
     private float yRange;
     public int maxRingCount; //클래스화?
     public static int currentRingCount ;
+
+    private bool isComplet;
     private void Start() {
         currentRingCount = 0;
         ringSpawner = GameObject.Find("Image").GetComponent<RingSpawner>();
@@ -27,8 +29,8 @@ public class Spawner : MonoBehaviour
 
 
     private void Update() {
-        
-    
+     
+
         //소환할때마다 카운트가 플러스되 맥스가 되면 더이상 생성하지마
         // 훅이 명중하면 사라져 몇초후에 
         // 생성하면 또 카운트플러스가되
@@ -61,20 +63,32 @@ public class Spawner : MonoBehaviour
 
             //여기에서 이미 나타날 위치를 정했으니까 여기에서 범위표시하는 이미지? 이펙트하면 도리
 
-            Instantiate(RingSign, pos, Quaternion.identity);
+            //Instantiate(RingSign, pos, Quaternion.identity);
 
-            //여기에서 함수로 다끝나고 난후 인스텐티어트를 하면되나?
-            
-
-            //findObject Cmaera.main
-            Instantiate(prefabRing, pos, Quaternion.identity);
-            //생성할떄 미리 알려주는 표시?
+            //계속발생하려면?
+            GameObject prefab = Instantiate(RingSign, pos, Quaternion.identity);
+    
+            yield return new WaitUntil(() => prefab.GetComponent<previewSigh>().isColorComplet);
             currentRingCount++;
-            yield return new WaitForSeconds(1f);
+
+            Instantiate(prefabRing, pos, Quaternion.identity);
+
+       
+           
+            //findObject Cmaera.main
+            //생성할떄 미리 알려주는 표시?
+
         }
         
     }
 
 
-    
+
+    private void FixedUpdate() {
+        //이러니까 업데이트를 못쓰네 업데이트에서도 코루틴할수있게 해야되나?
+
+    }
+
+
+
 }
