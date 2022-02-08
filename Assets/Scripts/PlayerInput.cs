@@ -9,11 +9,14 @@ public class PlayerInput : MonoBehaviour
 
     public bool isMouse { get; private set; }
 
+    public bool isDown { get; private set; }
+
     private void Update() {
 
         moveX = Input.GetAxisRaw("Horizontal");
         isJump = Input.GetKeyDown(KeyCode.Space);
         isMouse = Input.GetMouseButtonDown(0);
+        isDown = Input.GetKeyDown(KeyCode.S);
         print(isJump);
 
 

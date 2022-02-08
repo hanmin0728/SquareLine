@@ -69,6 +69,7 @@ public class GrapplingHook : MonoBehaviour
 
     private void FixedUpdate() {
         if (isMouse && !isHookActive) {
+            FloatingManager.instance.TextMeshFloating("발사!");
             hook.position = transform.position; //플레이어 위치에서 출발
             mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             isHookActive = true;
@@ -77,6 +78,7 @@ public class GrapplingHook : MonoBehaviour
 
         //발사하는 코드
         if (isHookActive && !isLineMax && !isAttach) {
+        
             reHookLastTime = Time.time;
             hook.Translate(mouseDir.normalized * Time.deltaTime * hookSpeed);
             //훅의 이동을 Translate로 한것 
@@ -95,8 +97,9 @@ public class GrapplingHook : MonoBehaviour
                 hook.gameObject.SetActive(false);
             }
         } else if (isAttach ) {
+            
             move.currentCount = move.jumpCount;
-       
+         
 
             if (reHookLastTime + reHookDelay < Time.time && (isMouse || isJump)) {
 
