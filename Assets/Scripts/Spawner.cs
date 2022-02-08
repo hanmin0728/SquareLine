@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
 
             //여기에서 이미 나타날 위치를 정했으니까 여기에서 범위표시하는 이미지? 이펙트하면 도리
 
-            Instantiate(RingSign, pos, Quaternion.identity);
+            //Instantiate(RingSign, pos, Quaternion.identity);
 
             //여기에서 함수로 다끝나고 난후 인스텐티어트를 하면되나?
             
