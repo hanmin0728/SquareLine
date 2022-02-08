@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     public int jumpCount;
     public int currentCount;
+    public int jumpForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +47,7 @@ public class PlayerMove : MonoBehaviour
         if(isJump && currentCount > 0) {
             currentCount--;
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * 10 , ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
         isJump = false;
         
