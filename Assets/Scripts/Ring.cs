@@ -29,7 +29,7 @@ public class Ring : MonoBehaviour
             //첫번쨰로 닿으면 증가시키고 
             // 사라지면 없애게 하고 
             // 한번닿고 사라지기전에 닿으면 2니까 그때는 실행안되게?
-            collision.gameObject.GetComponent<SpriteRenderer>().material.DOFade(0, 3).OnComplete(()=> {
+            collision.gameObject.GetComponent<SpriteRenderer>().material.DOFade(0, 1.5f).OnComplete(()=> {
                 currentTouchRing--;
 
                 collision.gameObject.SetActive(false);

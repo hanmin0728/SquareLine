@@ -63,18 +63,20 @@ public class Spawner : MonoBehaviour
 
             //여기에서 이미 나타날 위치를 정했으니까 여기에서 범위표시하는 이미지? 이펙트하면 도리
 
-            //Instantiate(RingSign, pos, Quaternion.identity);
+            Instantiate(RingSign, pos, Quaternion.identity);
 
             //계속발생하려면?
             GameObject prefab = Instantiate(RingSign, pos, Quaternion.identity);
-    
+
             yield return new WaitUntil(() => prefab.GetComponent<previewSigh>().isColorComplet);
             currentRingCount++;
 
             Instantiate(prefabRing, pos, Quaternion.identity);
 
-       
-           
+
+            //yield return new WaitForSeconds(1f);
+
+
             //findObject Cmaera.main
             //생성할떄 미리 알려주는 표시?
 
