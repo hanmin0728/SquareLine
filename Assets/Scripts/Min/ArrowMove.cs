@@ -20,7 +20,14 @@ public class ArrowMove : MonoBehaviour
     {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.GetComponent<Pl>().Damage(1);
+            Destroy(gameObject);
+        }
+    }
     //private void LimitPosition()
     //{
     //    if (GameManager.Instance.MaxPosition.y < Mathf.Abs(transform.position.y))
