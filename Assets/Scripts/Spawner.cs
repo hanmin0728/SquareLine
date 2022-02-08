@@ -67,7 +67,8 @@ public class Spawner : MonoBehaviour
 
             //계속발생하려면?
             GameObject prefab = Instantiate(RingSign, pos, Quaternion.identity);
-
+    
+            yield return new WaitUntil(() => prefab.GetComponent<previewSigh>().isColorComplet);
             currentRingCount++;
 
             Instantiate(prefabRing, pos, Quaternion.identity);
@@ -75,7 +76,6 @@ public class Spawner : MonoBehaviour
        
            
             //findObject Cmaera.main
-            yield return new WaitForSeconds(0.3f);
             //생성할떄 미리 알려주는 표시?
 
         }
