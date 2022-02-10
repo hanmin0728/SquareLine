@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
         isJump = Input.GetKeyDown(KeyCode.Space);
         isMouse = Input.GetMouseButtonDown(0);
         isDown = Input.GetKeyDown(KeyCode.S);
-        print(isJump);
+
 
 
     }

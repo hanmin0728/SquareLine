@@ -8,6 +8,8 @@ public class GrapplingHook : MonoBehaviour
     public Transform hook;
     PlayerInput input;
     PlayerMove move;
+
+    PlayerAnimation anim;
     Vector2 mouseDir;
     /// <summary>
     /// e키 눌렀을떄 참또는 거짓되는거
@@ -32,7 +34,7 @@ public class GrapplingHook : MonoBehaviour
     private void Awake() {
         move = GetComponent<PlayerMove>();
         input = GetComponent<PlayerInput>();
-
+        anim = GetComponent<PlayerAnimation>();
     }
 
     private void Start() {
@@ -69,6 +71,7 @@ public class GrapplingHook : MonoBehaviour
 
     private void FixedUpdate() {
         if (isMouse && !isHookActive) {
+      
             FloatingManager.instance.TextMeshFloating("발사!");
             hook.position = transform.position; //플레이어 위치에서 출발
             mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -97,12 +100,12 @@ public class GrapplingHook : MonoBehaviour
                 hook.gameObject.SetActive(false);
             }
         } else if (isAttach ) {
-            
+            anim.Hook(true);
             move.currentCount = move.jumpCount;
-         
+            
 
             if (reHookLastTime + reHookDelay < Time.time && (isMouse || isJump)) {
-
+                anim.Hook(false);
                 reHookLastTime = Time.time;
                 isAttach = false;
                 isHookActive = false; //프로그램은 계속흐르기만 하니까 조건문이

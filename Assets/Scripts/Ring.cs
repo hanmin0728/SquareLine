@@ -19,7 +19,7 @@ public class Ring : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Ring")) {
-                     
+            //CancelInvoke();
             currentTouchRing++;
             //grappling.hook.position
             int Randnum = Random.Range(1, 7); //닿으면 랜덤값을 주고 다사라졌을떄 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RingSpawner : MonoBehaviour
+public class RingSpawnSize : MonoBehaviour
 {
     RectTransform _rectTransform;
 
@@ -14,7 +14,7 @@ public class RingSpawner : MonoBehaviour
             if (_rectTransform == null)
                 _rectTransform = GetComponent<RectTransform>();
 
-           Debug.Log( _rectTransform.sizeDelta.x);
+           //Debug.Log( _rectTransform.sizeDelta.x);
             return _rectTransform.sizeDelta.x;
 
         }
@@ -27,7 +27,7 @@ public class RingSpawner : MonoBehaviour
             if (_rectTransform == null)
                 _rectTransform = GetComponent<RectTransform>();
 
-            Debug.Log(_rectTransform.sizeDelta.y);
+            //Debug.Log(_rectTransform.sizeDelta.y);
             return _rectTransform.sizeDelta.y;
 
         }

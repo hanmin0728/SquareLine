@@ -25,8 +25,12 @@ public class SoundManager : MonoBehaviour {
 
     public void Start() {
         instance = this; //인스턴스에 자기자신을 넣음 뭔가 c++ int &a 같네 
-        PlayRandomBGM();
+       // PlayRandomBGM();
     }
+
+
+    //이걸 이제 빠르게 만들어야하는
+
     public void PlaySE(string _soundName) {
         for (int i = 0; i < sfxSounds.Length; i++) {
             if (_soundName == sfxSounds[i].soundName) {//재생중이지 않은 플레이어를 찾아야됨

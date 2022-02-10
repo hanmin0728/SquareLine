@@ -8,7 +8,8 @@ public class PlayerMove : MonoBehaviour
     PlayerInput input;
     Rigidbody2D rigid;
     GrapplingHook grappling;
-
+    PlayerAnimation anim;
+    SpriteRenderer sprite;
     public float moveSpeed;
     public bool isJump;
     public bool isDown;
@@ -24,8 +25,10 @@ public class PlayerMove : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<PlayerAnimation>();
         currentCount = jumpCount;
         input = GetComponent<PlayerInput>();
         rigid = GetComponent<Rigidbody2D>();
@@ -51,6 +54,12 @@ public class PlayerMove : MonoBehaviour
 
         float moveX = input.moveX;
 
+        if(moveX < 0) {
+            sprite.flipX = true;
+        }
+        else if(moveX > 0) {
+            sprite.flipX = false;
+        }
         //print(grappling.isAttach);
         if (grappling.isAttach) //아 붙은 상태를 불로도 할수있구나 그냥 조건문이 답이네 반복문도 딕셔너리도 쓸수있을때니까
             rigid.AddForce(new Vector2(moveX * moveSpeed, 0));
@@ -70,6 +79,7 @@ public class PlayerMove : MonoBehaviour
             currentCount--;
             rigid.velocity = Vector2.zero;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            anim.Jump();
         }
         else if(isJump) {
             if (jumpCountis < 6) {
@@ -87,7 +97,7 @@ public class PlayerMove : MonoBehaviour
         isJump = false;
         
         if(isDown) {
-            FloatingManager.instance.TextMeshFloating("급강하!"   , Color.yellow);
+            FloatingManager.instance.TextMeshFloating("급강하!", Color.yellow);
             currentCount = 1;
             rigid.velocity = Vector2.zero;
             rigid.AddForce(Vector2.down * downForce, ForceMode2D.Impulse);

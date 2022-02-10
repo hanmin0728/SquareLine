@@ -9,12 +9,15 @@ public class RingMove : MonoBehaviour {
     [Range(0, 1)]
     [SerializeField] public float moveSpeed;
 
-
     Vector3 endPos1; //첫번쨰 목적지
     Vector3 endPos2; //두번째 목적지
     Vector3 currentDestination;
 
+    private void Awake() {
+
+    }
     private void Start() {
+        
         Vector3 originPos = transform.position; //현재위치 저장
         //현재위치에서 값만큼 y에서 값만큼 미리 저장
         endPos1.Set(originPos.x + horizontalDistance, originPos.y + verticalDistance, originPos.z);
@@ -24,6 +27,7 @@ public class RingMove : MonoBehaviour {
 
 
     private void Update() {
+
         //Debug.Log("움직임");
         if ((transform.position - endPos1).sqrMagnitude <= 0.2f) //Distance나 magintude는 매프레임마다에서는 성능상 불리함
         {
