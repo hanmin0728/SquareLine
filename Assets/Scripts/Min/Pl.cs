@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.
 public class Pl : MonoBehaviour
 {
     [SerializeField]
@@ -12,17 +11,13 @@ public class Pl : MonoBehaviour
     private GameObject bloodParticle;
     int maxHp = 5;
     private int curHp=5;
-    public Light light;
     private void Start()
     {
         heartSystem.Set(maxHp);
     }
     private void Update()
     {
-        if (curHp == 1)
-        {
-            light.i
-        }
+       
     }
     public void Heal(int amount)
     {
