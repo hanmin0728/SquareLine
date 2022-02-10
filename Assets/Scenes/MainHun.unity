@@ -8487,6 +8487,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2081269780}
   - component: {fileID: 3298174898615280099}
+  - component: {fileID: 2081269783}
+  - component: {fileID: 2081269782}
   - component: {fileID: 2081269779}
   - component: {fileID: 2081269778}
   - component: {fileID: 2081269777}
@@ -8664,6 +8666,36 @@ MonoBehaviour:
   hookDelay: 0.5
   reHookDelay: 0.1
   particleSystem: {fileID: 0}
+--- !u!114 &2081269782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081269774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ece112279675647b4a4beda061a18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  circleRange: 1.5
+--- !u!114 &2081269783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081269774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2380c4e25eccdf2498520a953d62e0f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+  radius: 1.5
 --- !u!1001 &2086392300
 PrefabInstance:
   m_ObjectHideFlags: 0

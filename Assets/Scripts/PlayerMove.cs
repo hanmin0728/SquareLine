@@ -62,9 +62,9 @@ public class PlayerMove : MonoBehaviour
             Flip();
         //print(grappling.isAttach);
         if (grappling.isAttach) //아 붙은 상태를 불로도 할수있구나 그냥 조건문이 답이네 반복문도 딕셔너리도 쓸수있을때니까
-            rigid.AddForce(new Vector2(moveX * moveSpeed, 0));
+            rigid.AddForce(new Vector2(moveX * moveSpeed * GameManager.TimeScale, 0));
         else
-            rigid.velocity = (new Vector2(moveX * moveSpeed , rigid.velocity.y));
+            rigid.velocity = (new Vector2(moveX * moveSpeed * GameManager.TimeScale, rigid.velocity.y));
 
 
     }
@@ -96,7 +96,7 @@ public class PlayerMove : MonoBehaviour
             FloatingManager.instance.TextMeshFloating("점프!");
             currentCount--;
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * jumpForce * GameManager.TimeScale, ForceMode2D.Impulse);
             anim.Jump();
         }
         else if(isJump) {
@@ -120,7 +120,7 @@ public class PlayerMove : MonoBehaviour
             FloatingManager.instance.TextMeshFloating("급강하!", Color.yellow);
             currentCount = 1;
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(Vector2.down * downForce, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.down * downForce * GameManager.TimeScale, ForceMode2D.Impulse);
         }
 
         isDown = false;
@@ -129,6 +129,7 @@ public class PlayerMove : MonoBehaviour
         if(rigid.velocity.y < -20 && isDownParticle) {
             isDownParticle = false;
             Vector3 pos = transform.position;
+
             downParticle.transform.position = downPos.position;
             //downParticle.transform.Translate(Vector2.down * 10);
             //downParticle.transform.localPosition *= Vector2.down * 1; 
