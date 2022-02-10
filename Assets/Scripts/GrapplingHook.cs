@@ -9,6 +9,7 @@ public class GrapplingHook : MonoBehaviour
     PlayerInput input;
     PlayerMove move;
 
+    public Transform hookSprite;
     PlayerAnimation anim;
     Vector2 mouseDir;
     /// <summary>
@@ -49,6 +50,7 @@ public class GrapplingHook : MonoBehaviour
         line.SetPosition(1, hook.position); // 한점은 hook의 포지션으로
         line.useWorldSpace = true; //월드좌표를 기준으로 화면에 그려지게됨
         isAttach = false;
+  
     }
 
 
@@ -66,7 +68,8 @@ public class GrapplingHook : MonoBehaviour
         line.SetPosition(0, transform.position); //플레이어 포지션
         line.SetPosition(1, hook.position); // 한점은 hook의 포지션으로
 
-
+        //플레이어위치
+  
 
         //e키 눌렀을떄 방향을 구하는 코드
 
@@ -76,6 +79,10 @@ public class GrapplingHook : MonoBehaviour
 
     bool isEffect = false;
 
+    float angle;
+    Vector2 playerPosition;
+    Vector2 tartget;
+
     private void FixedUpdate() {
 
    
@@ -83,9 +90,17 @@ public class GrapplingHook : MonoBehaviour
 
         if (isMouse && !isHookActive) {
 
-    
+            playerPosition = transform.position;
+            tartget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            angle = Mathf.Atan2(tartget.y - playerPosition.y, tartget.x - playerPosition.x) * Mathf.Rad2Deg;
+
+            hookSprite.rotation = Quaternion.Euler(0, 0, angle);//Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+
             FloatingManager.instance.TextMeshFloating("발사!");
             hook.position = transform.position; //플레이어 위치에서 출발
+           
             mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             isHookActive = true;
             hook.gameObject.SetActive(true);

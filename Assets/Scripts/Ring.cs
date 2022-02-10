@@ -14,8 +14,8 @@ public class Ring : MonoBehaviour
 
     private bool isCompltColor = false;
     public int currentTouchRing = 0;
-    float angle;
     public ParticleSystem particleSystem;
+    float angle;
     Vector2 playerPosition;
     Vector2 tartget;
     private void Start() {
@@ -41,7 +41,8 @@ public class Ring : MonoBehaviour
             grappling.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             //CancelInvoke();
             currentTouchRing++;
-
+            //grappling.HookRotatSet(angle);
+           // grappling.hook.transform.rotation = Quaternion.Euler(0, 0, angle);
             //particleSystem.startRotation = 0;
             particleSystem.transform.position = grappling.transform.position;
             //particleSystem.startRotation = -angle;
