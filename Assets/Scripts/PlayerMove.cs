@@ -10,6 +10,10 @@ public class PlayerMove : MonoBehaviour
     GrapplingHook grappling;
     PlayerAnimation anim;
     SpriteRenderer sprite;
+    public ParticleSystem particleSystem;
+    public ParticleSystem downParticle;
+    //public ParticleSet particleSet;
+    public Transform downPos;
     public float moveSpeed;
     public bool isJump;
     public bool isDown;
@@ -54,12 +58,8 @@ public class PlayerMove : MonoBehaviour
 
         float moveX = input.moveX;
 
-        if(moveX < 0) {
-            sprite.flipX = true;
-        }
-        else if(moveX > 0) {
-            sprite.flipX = false;
-        }
+        if ((moveX > 0 && !facingRight) || (moveX < 0 && facingRight))
+            Flip();
         //print(grappling.isAttach);
         if (grappling.isAttach) //아 붙은 상태를 불로도 할수있구나 그냥 조건문이 답이네 반복문도 딕셔너리도 쓸수있을때니까
             rigid.AddForce(new Vector2(moveX * moveSpeed, 0));
@@ -70,9 +70,27 @@ public class PlayerMove : MonoBehaviour
     }
 
     public int jumpCountis = 0;
+
+    [Header("무빙관련")]
+
+    public bool facingRight;
+    private void Flip() {
+        facingRight = !facingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+    bool isDownParticle;
     private void FixedUpdate() {
-        
-        if(isJump && currentCount > 0) {
+
+
+
+        if (isJump && currentCount > 0) {
+
+            particleSystem.transform.position = transform.position;
+
+            particleSystem.Play();
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             jumpCountis = 0;
             //FloatingManager.instance.TextMeshFloating($"점프횟수:{currentCount}!");
             FloatingManager.instance.TextMeshFloating("점프!");
@@ -95,8 +113,10 @@ public class PlayerMove : MonoBehaviour
           
         }
         isJump = false;
+ 
         
         if(isDown) {
+            isDownParticle = true;
             FloatingManager.instance.TextMeshFloating("급강하!", Color.yellow);
             currentCount = 1;
             rigid.velocity = Vector2.zero;
@@ -104,5 +124,15 @@ public class PlayerMove : MonoBehaviour
         }
 
         isDown = false;
+
+
+        if(rigid.velocity.y < -20 && isDownParticle) {
+            isDownParticle = false;
+            Vector3 pos = transform.position;
+            downParticle.transform.position = downPos.position;
+            //downParticle.transform.Translate(Vector2.down * 10);
+            //downParticle.transform.localPosition *= Vector2.down * 1; 
+            downParticle.Play();
+        }
     }
 }

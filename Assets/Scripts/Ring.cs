@@ -5,22 +5,51 @@ using DG.Tweening;
 
 public class Ring : MonoBehaviour
 {
+
+    
     PlayerMove move;
     GrapplingHook grappling;
+
     public DistanceJoint2D joint2D;
 
     private bool isCompltColor = false;
     public int currentTouchRing = 0;
+    float angle;
+    public ParticleSystem particleSystem;
+    Vector2 playerPosition;
+    Vector2 tartget;
     private void Start() {
         
         grappling = GameObject.Find("Player").GetComponent<GrapplingHook>();
         joint2D = GetComponent<DistanceJoint2D>();
+
+
     }
+
+    //풀매니저 겟아이템도 좋구만 풀된걸가져오는
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Ring")) {
+
+            playerPosition = grappling.transform.position; //플레이어위치
+
+            tartget = collision.transform.position;
+
+            angle = Mathf.Atan2(tartget.y - playerPosition.y, tartget.x - playerPosition.x) * Mathf.Rad2Deg;
+
+            grappling.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             //CancelInvoke();
             currentTouchRing++;
+
+            //particleSystem.startRotation = 0;
+            particleSystem.transform.position = grappling.transform.position;
+            //particleSystem.startRotation = -angle;
+            particleSystem.transform.rotation = Quaternion.Euler(0,0,angle);
+            particleSystem.Play();
+
+            //영어쓰자
+
             //grappling.hook.position
             int Randnum = Random.Range(1, 7); //닿으면 랜덤값을 주고 다사라졌을떄 
 
@@ -68,6 +97,17 @@ public class Ring : MonoBehaviour
         while (true) 
         {
             grappling.hook.position = collision.transform.position; //이걸반복되게
+            playerPosition = grappling.transform.position;
+            tartget = collision.transform.position;
+
+
+            //print(Vector2.Distance(playerPosition, tartget));
+            if (Vector2.Distance(playerPosition, tartget) <=3) {
+                //DIstance가 두 포지션의 값을 거리로 한건가
+                //grappling.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                grappling.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), 0.5f);
+            }
             yield return null;
         }
         

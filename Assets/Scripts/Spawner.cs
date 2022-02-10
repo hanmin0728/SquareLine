@@ -24,6 +24,7 @@ public class Spawner : MonoBehaviour
     float m;
     private void Awake() {
         inst = this;
+    
     }
 
 
@@ -36,7 +37,7 @@ public class Spawner : MonoBehaviour
         StartCoroutine(Spawn());
 
         //Debug.Log($"{xRange}, {yRange}");
-        
+
     }
 
 
@@ -49,6 +50,8 @@ public class Spawner : MonoBehaviour
 
     }
 
+
+    //엉망징찬이긴하다
     public IEnumerator Spawn() {
         Camera mainCam = Camera.main;
         while (true) {
@@ -86,17 +89,20 @@ public class Spawner : MonoBehaviour
             previewSigh Sign = prefab.GetComponent<previewSigh>();
             // StopCoroutine(Sign.ColorToggle());
             int num = Random.Range(0, 3);
-
+            int currentNum = 0;
+        
             switch (num) {
                 case 0:
                 case 1:
-                num = 0;
+                case 3:
+                currentNum = 0;
                 break;
                 case 2:
-                num = 1;
+                currentNum = 1;
                 break;
             }
-
+            num = currentNum;
+            //순간에 바뀌니까 그렇구만 그럼마지막에도 바꿔야 하네
             yield return StartCoroutine(Sign.ColorToggle(num));
 
             //훅링스크립트나 자료형을 가져와서 하는방법이나 여기에서 태어나는 것을 미리 정해준다거나
@@ -110,6 +116,7 @@ public class Spawner : MonoBehaviour
             //실행시점스바루
             //완료되기도 전에 트루가 되기때문인가>?
             yield return new WaitUntil(() => prefab.GetComponent<previewSigh>().isColorComplet);
+            num = currentNum;
             //StopCoroutine(Sign.ColorToggle(num));
             currentRingCount++;
             GameObject ringPre = PoolManager.SpawnFromPool("Ring", pos);
@@ -127,12 +134,15 @@ public class Spawner : MonoBehaviour
             m = Random.Range(0.7f, 1f);
 
 
+            print($"{currentRingCount}인데 {num}");
             if (ringMove != null && num == 1) {
-
+                print("됨?");
                 //근데 이게 독립이 아닐경우에는?
                 ringMove.verticalDistance = v;
-                ringMove.horizontalDistance = h;
+                ringMove.horizontalDistance = h; //그함수내에서 바꾸게 하는 흑 흑
                 ringMove.moveSpeed = m;
+
+                ringMove.RimgMovePosSet();
             }
 
             yield return new WaitForSeconds(0.3f);

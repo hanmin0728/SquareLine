@@ -17,14 +17,16 @@ public class RingMove : MonoBehaviour {
 
     }
     private void Start() {
-        
-        Vector3 originPos = transform.position; //현재위치 저장
-        //현재위치에서 값만큼 y에서 값만큼 미리 저장
+
+        RimgMovePosSet();
+    }
+
+    public void RimgMovePosSet() {
+        Vector3 originPos = transform.position;
         endPos1.Set(originPos.x + horizontalDistance, originPos.y + verticalDistance, originPos.z);
         endPos2.Set(originPos.x - horizontalDistance, originPos.y - verticalDistance, originPos.z);
         currentDestination = endPos1;
     }
-
 
     private void Update() {
 

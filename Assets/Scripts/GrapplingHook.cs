@@ -30,11 +30,14 @@ public class GrapplingHook : MonoBehaviour
 
     private float reHookLastTime;
     public float reHookDelay;
-   
+
+    public ParticleSystem particleSystem;
     private void Awake() {
         move = GetComponent<PlayerMove>();
         input = GetComponent<PlayerInput>();
         anim = GetComponent<PlayerAnimation>();
+        
+
     }
 
     private void Start() {
@@ -69,9 +72,18 @@ public class GrapplingHook : MonoBehaviour
 
     }
 
+
+
+    bool isEffect = false;
+
     private void FixedUpdate() {
+
+   
+
+
         if (isMouse && !isHookActive) {
-      
+
+    
             FloatingManager.instance.TextMeshFloating("발사!");
             hook.position = transform.position; //플레이어 위치에서 출발
             mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -102,9 +114,13 @@ public class GrapplingHook : MonoBehaviour
         } else if (isAttach ) {
             anim.Hook(true);
             move.currentCount = move.jumpCount;
-            
+
+         
+        
 
             if (reHookLastTime + reHookDelay < Time.time && (isMouse || isJump)) {
+
+                transform.rotation = Quaternion.Euler(0, 0, 0);
                 anim.Hook(false);
                 reHookLastTime = Time.time;
                 isAttach = false;
@@ -120,5 +136,6 @@ public class GrapplingHook : MonoBehaviour
         isJump = false;
         isMouse = false;
     }
+
  
 }

@@ -22,6 +22,8 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("xMove", Mathf.Abs(xMove));
 
         anim.SetFloat(hashYSpeed, rigid.velocity.y);
+
+
     }
 
 
