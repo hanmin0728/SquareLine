@@ -28,7 +28,7 @@ public class SpawnArrowManager : MonoBehaviour {
             arrow = PoolManager.SpawnFromPool("WarningSign", pos, Quaternion.identity);
             arrow.transform.position = Camera.main.ViewportToWorldPoint(pos);
             //위치에 소환해주고 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

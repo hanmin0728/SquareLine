@@ -125,7 +125,6 @@ public class Spawner : MonoBehaviour
             //
             SetDistance(ringMove, num);
 
-            yield return new WaitForSeconds(0.3f);
 
         }
 

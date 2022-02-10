@@ -14,16 +14,16 @@ public class PlayerCircle : MonoBehaviour
     private void Update() {
 
         
-        Collider2D collider2D =Physics2D.OverlapCircle(transform.position, circleRange, layer);
-        if (collider2D != null) {
+        //Collider2D collider2D =Physics2D.OverlapCircle(transform.position, circleRange, layer);
+        //if (collider2D != null) {
 
-            print("감지");
+        //    print("감지");
 
 
-            GameManager.TimeScale = 0.4f;
-        } else if(collider2D == null) {
-            GameManager.TimeScale = 1;
-        }
+        //    GameManager.TimeScale = 0.4f;
+        //} else if(collider2D == null) {
+        //    GameManager.TimeScale = 1;
+        //}
            
 
     }
