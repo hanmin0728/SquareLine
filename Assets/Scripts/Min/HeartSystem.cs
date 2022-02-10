@@ -9,7 +9,7 @@ public class HeartSystem : MonoBehaviour
 
     [SerializeField]
     private Transform trans;
-
+     
     [SerializeField] 
     private GameObject[] objects;
     public void Set(int _maxHp)

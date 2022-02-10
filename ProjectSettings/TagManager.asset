@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ring
   - Arrow
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemy
+    uniqueID: 1650762451
     locked: 0

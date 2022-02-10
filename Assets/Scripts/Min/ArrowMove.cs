@@ -14,7 +14,7 @@ public class ArrowMove : MonoBehaviour
     void Update()
     {
         Move();
-        //LimitPosition();
+       LimitPosition();
     }
     private void Move()
     {
@@ -28,17 +28,17 @@ public class ArrowMove : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    //private void LimitPosition()
-    //{
-    //    if (GameManager.Instance.MaxPosition.y < Mathf.Abs(transform.position.y))
-    //    {
-    //        allPooler.DeSpawn();
-    //    }
-    //    if (GameManager.Instance.MaxPosition.x < Mathf.Abs(transform.position.x))
-    //    {
-    //        allPooler.DeSpawn();
-    //    }
-    //}
+    private void LimitPosition()
+    {
+        if (GameManager.Instance.MaxPosition.y < Mathf.Abs(transform.position.y))
+        {
+            Destroy(gameObject);
+        }
+        if (GameManager.Instance.MaxPosition.x < Mathf.Abs(transform.position.x))
+        {
+            Destroy(gameObject);
+        }
+    }
     void SetPosition()
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
