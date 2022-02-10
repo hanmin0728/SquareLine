@@ -142,6 +142,8 @@ public class Spawner : MonoBehaviour
                 ringMove.horizontalDistance = h; //그함수내에서 바꾸게 하는 흑 흑
                 ringMove.moveSpeed = m;
 
+
+                
                 ringMove.RimgMovePosSet();
             }
 

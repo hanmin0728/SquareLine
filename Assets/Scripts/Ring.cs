@@ -32,6 +32,7 @@ public class Ring : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Ring")) {
 
+            SoundManager.instance.PlaySE("hook");
             playerPosition = grappling.transform.position; //플레이어위치
 
             tartget = collision.transform.position;
@@ -47,6 +48,8 @@ public class Ring : MonoBehaviour
             particleSystem.transform.position = grappling.transform.position;
             //particleSystem.startRotation = -angle;
             particleSystem.transform.rotation = Quaternion.Euler(0,0,angle);
+
+            SoundManager.instance.PlaySE("HookDash");
             particleSystem.Play();
 
             //영어쓰자

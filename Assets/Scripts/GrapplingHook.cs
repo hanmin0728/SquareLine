@@ -20,6 +20,8 @@ public class GrapplingHook : MonoBehaviour
     public bool isAttach;
     [Header("훅스피드")]
     public float hookSpeed;
+
+    public float hookBackSpeed;
     [Header("훅길이")]
     public float hootMax;
 
@@ -120,7 +122,7 @@ public class GrapplingHook : MonoBehaviour
         }
         //최대크기시 돌아오는 코드
         else if (isHookActive && isLineMax && !isAttach) {
-            hook.position = Vector2.MoveTowards(hook.position, transform.position, Time.deltaTime * hookSpeed);
+            hook.position = Vector2.MoveTowards(hook.position, transform.position, Time.deltaTime * hookBackSpeed);
             if (Vector2.Distance(transform.position, hook.position) < 0.1f) {
                 isHookActive = false; //트루가 되면 펄스가 되는조건도 만들어줌
                 isLineMax = false;

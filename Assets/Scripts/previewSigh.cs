@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class previewSigh : MonoBehaviour {
     //다른객체에서도 할수있게 인터페이스로?
     SpriteRenderer sprite;
-
+   
     public Color[] colorSet = new Color[2];
     int idx = 0;
     public bool isColorComplet = false;
@@ -43,7 +43,7 @@ public class previewSigh : MonoBehaviour {
            
             break;
             case 1:
-            colorSet = sings[num].color;
+            colorSet = sings[num].color; 
             break;
             case 2:
             colorSet = sings[num].color;

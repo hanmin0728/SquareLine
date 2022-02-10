@@ -34,8 +34,11 @@ public class FloatingManager : MonoBehaviour
         //print(c.HasValue);
         hudText.GetComponentInChildren<TextMeshProUGUI>().color = c.HasValue ? c.Value : Color.white;
 
-
+        TestMeshProText test = hudText.GetComponentInChildren<TestMeshProText>();
+        test.SetColor(c.HasValue ? c.Value : Color.white);
 
 
     }
+
+    
 }

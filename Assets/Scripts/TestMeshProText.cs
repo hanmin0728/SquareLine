@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TestMeshProText : MonoBehaviour
-{
+public class TestMeshProText : MonoBehaviour {
     public float moveSpeed; //텍스트 이동속도
     public float alphaSpeed; //투명도 변환속도
 
@@ -15,7 +14,11 @@ public class TestMeshProText : MonoBehaviour
 
     private void OnEnable() {
         text = GetComponent<TextMeshProUGUI>();
+
+        
         alpha = text.color;
+
+
         Invoke("DestroyObject", destroyTime);
 
     }
@@ -28,7 +31,11 @@ public class TestMeshProText : MonoBehaviour
         text.color = alpha;
     }
 
+    public void SetColor(Color c) {
+        
 
+        text.color = c;
+    }
 
 
 }

@@ -9,6 +9,8 @@ public class Sound {
     public string soundName;
     public AudioClip clip;
 }
+
+
 public class SoundManager : MonoBehaviour {
     public static SoundManager instance; //Static 공유 변수. 어디서든 쉽게 참조 변경이 가능함
     [Header("사운드 목록")]
@@ -25,7 +27,7 @@ public class SoundManager : MonoBehaviour {
 
     public void Start() {
         instance = this; //인스턴스에 자기자신을 넣음 뭔가 c++ int &a 같네 
-       // PlayRandomBGM();
+       PlayRandomBGM();
     }
 
 

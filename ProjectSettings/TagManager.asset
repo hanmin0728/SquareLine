@@ -47,3 +47,9 @@ TagManager:
   - name: Enemy
     uniqueID: 1650762451
     locked: 0
+  - name: Player
+    uniqueID: 1100023503
+    locked: 0
+  - name: GameSCenaen
+    uniqueID: 2560211045
+    locked: 0
