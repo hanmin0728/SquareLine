@@ -5,20 +5,23 @@ public class Pl : MonoBehaviour
 {
     [SerializeField]
     private CamManager camManager;
-    [SerializeField] 
+    [SerializeField]
     private HeartSystem heartSystem;
     [SerializeField]
     private GameObject bloodParticle;
     int maxHp = 5;
-    private int curHp=5;
+    private int curHp = 5;
     private void Start()
     {
         heartSystem.Set(maxHp);
     }
     private void Update()
     {
-       
+        if (transform.position.y < -15f)
+        {
+        }
     }
+   
     public void Heal(int amount)
     {
         curHp += amount;
