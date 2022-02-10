@@ -62,9 +62,6 @@ public class Spawner : MonoBehaviour
                 yield return null;
                 continue;
             }
-
-
-            //
             float x = Random.Range(0 + circleSprtie.bounds.size.x, xRange - circleSprtie.bounds.size.x); //1665.87 0이라서 이미지의 posX , PosY
 
             float y = Random.Range(0 + circleSprtie.bounds.size.x, yRange - circleSprtie.bounds.size.x); //870.0401
@@ -75,34 +72,27 @@ public class Spawner : MonoBehaviour
                                                           // x 반이상이면 
                                                           // 127 + 104 
 
-
-            // Debug.Log(range);
             Vector3 pos = mainCam.ScreenToWorldPoint(range);
             pos.z = 0;
 
-            //여기에서 이미 나타날 위치를 정했으니까 여기에서 범위표시하는 이미지? 이펙트하면 도리
 
-            //Instantiate(RingSign, pos, Quaternion.identity);
-
-            //계속발생하려면?
             GameObject prefab = PoolManager.SpawnFromPool("RingSign", pos);
             previewSigh Sign = prefab.GetComponent<previewSigh>();
             // StopCoroutine(Sign.ColorToggle());
             int num = Random.Range(0, 3);
-            int currentNum = 0;
-        
             switch (num) {
                 case 0:
                 case 1:
                 case 3:
-                currentNum = 0;
+                num = 0;
                 break;
                 case 2:
-                currentNum = 1;
+                num = 1;
                 break;
             }
-            num = currentNum;
             //순간에 바뀌니까 그렇구만 그럼마지막에도 바꿔야 하네
+
+
             yield return StartCoroutine(Sign.ColorToggle(num));
 
             //훅링스크립트나 자료형을 가져와서 하는방법이나 여기에서 태어나는 것을 미리 정해준다거나
@@ -116,10 +106,14 @@ public class Spawner : MonoBehaviour
             //실행시점스바루
             //완료되기도 전에 트루가 되기때문인가>?
             yield return new WaitUntil(() => prefab.GetComponent<previewSigh>().isColorComplet);
-            num = currentNum;
-            //StopCoroutine(Sign.ColorToggle(num));
+            //프리뷰사인에서 생성해주면 될듯
+            //그리고 프리뷰사인을 객채화해서 쓸려면 어케할까?
+            //생성하는 게임오브젝트를 하고하면 되지않을ㄲ?
+
+            //이걸 범위표시에서 생성하게 하려면 어케 할까?
+
             currentRingCount++;
-            GameObject ringPre = PoolManager.SpawnFromPool("Ring", pos);
+            GameObject ringPre = PoolManager.SpawnFromPool("Ring", pos); //여기를 GameObjectName으로
             scaleRing = Random.Range(0.4f, 1f);
             //public 도 실험해봐야겠다
             HookRing hookRing = ringPre.GetComponent<HookRing>();
@@ -127,40 +121,48 @@ public class Spawner : MonoBehaviour
 
             ringMove = ringPre.GetComponent<RingMove>();
 
-
-
-            v = Random.Range(1f, 4f);
-            h = Random.Range(1f, 4f);
-            m = Random.Range(0.7f, 1f);
-
-
-            print($"{currentRingCount}인데 {num}");
-            if (ringMove != null && num == 1) {
-                print("됨?");
-                //근데 이게 독립이 아닐경우에는?
-                ringMove.verticalDistance = v;
-                ringMove.horizontalDistance = h; //그함수내에서 바꾸게 하는 흑 흑
-                ringMove.moveSpeed = m;
-
-
-                
-                ringMove.RimgMovePosSet();
-            }
+            //숫자마다 색깔지정도 있고
+            //
+            SetDistance(ringMove, num);
 
             yield return new WaitForSeconds(0.3f);
 
-            //yield return new WaitForSeconds(1f);
-            //아니면 previewSigh에서 관리하거나
-
-            //findObject Cmaera.main
-            //생성할떄 미리 알려주는 표시?
-
         }
+
+
+
 
     }
 
+    //1이면 이렇게 값을 0으로하는것도 방법이구나
+    //  이렇게 하면되는구나
+
+    //이걸 링무브에 옴겨가지고 
+    public void SetDistance(RingMove ringMove, int num) { //이것도 저쪽에서 관리?
+
+        v = Random.Range(1f, 4f);
+        h = Random.Range(1f, 4f);
+        m = Random.Range(0.7f, 1f);
+
+        if (num == 0) {
+            ringMove.verticalDistance = 0;
+            ringMove.horizontalDistance = 0; //그함수내에서 바꾸게 하는 흑 흑
+            ringMove.moveSpeed = 0;
+            ringMove.RimgMovePosSet();
+            ringMove.RingMoveZero();
+        }
+        if (ringMove != null && num == 1) {
+            //print("됨?");
+            //근데 이게 독립이 아닐경우에는?
+            ringMove.verticalDistance = v;
+            ringMove.horizontalDistance = h; //그함수내에서 바꾸게 하는 흑 흑
+            ringMove.moveSpeed = m;
 
 
+
+            ringMove.RimgMovePosSet();
+        }
+    }
     private void FixedUpdate() {
         //이러니까 업데이트를 못쓰네 업데이트에서도 코루틴할수있게 해야되나?
 

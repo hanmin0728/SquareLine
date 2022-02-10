@@ -27,7 +27,7 @@ public class HookRing : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, 1);
     }
     private void OnDisable() {
-        print("しいいし");
+        //print("しいいし");
         PoolManager.ReturnToPool(gameObject);
         CancelInvoke();
     }

@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
 
 
     // Start is called before the first frame update
+    Camera main;
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -38,20 +39,31 @@ public class PlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         grappling = GetComponent<GrapplingHook>();
         downLastTime = Time.time;
+        main = Camera.main;
     }
 
     public float hookMoveSpeed;
 
+
     // Update is called once per frame
     void Update()
     {
-        if(input.isJump ) {
+
+        Vector3 pos = main.WorldToViewportPoint(transform.position);
+
+        if (pos.x < 0f) pos.x = 0f;
+        if (pos.x > 1f) pos.x = 1f;
+        if (pos.x > 1f) pos.y = 1f;
+
+        transform.position = main.ViewportToWorldPoint(pos);
+
+        if (input.isJump ) {
             isJump = true;
         }
 
         if(input.isDown && downDelay + downLastTime < Time.time) {
             downLastTime = Time.time;
-            Debug.Log("다운딜레이");
+            //Debug.Log("다운딜레이");
             isDown = true;
         }
       
@@ -60,11 +72,13 @@ public class PlayerMove : MonoBehaviour
 
         if ((moveX > 0 && !facingRight) || (moveX < 0 && facingRight))
             Flip();
+
+        print(moveX);
         //print(grappling.isAttach);
         if (grappling.isAttach) //아 붙은 상태를 불로도 할수있구나 그냥 조건문이 답이네 반복문도 딕셔너리도 쓸수있을때니까
-            rigid.AddForce(new Vector2(moveX * moveSpeed * GameManager.TimeScale, 0));
+            rigid.AddForce(new Vector2(moveX * hookMoveSpeed * GameManager.TimeScale, 0));
         else
-            rigid.velocity = (new Vector2(moveX * hookMoveSpeed * GameManager.TimeScale, rigid.velocity.y));
+            rigid.velocity = (new Vector2(moveX * moveSpeed * GameManager.TimeScale, rigid.velocity.y));
 
 
     }
@@ -94,7 +108,7 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
             jumpCountis = 0;
             //FloatingManager.instance.TextMeshFloating($"점프횟수:{currentCount}!");
-            FloatingManager.instance.TextMeshFloating("점프!");
+            FloatingManager.instance.TextMeshFloating("점프!", Color.white);
             currentCount--;
             rigid.velocity = Vector2.zero;
             rigid.AddForce(Vector2.up * jumpForce * GameManager.TimeScale, ForceMode2D.Impulse);

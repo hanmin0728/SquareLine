@@ -13,6 +13,7 @@ public class Potion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             collision.GetComponent<Pl>().Heal(1);
             Destroy(gameObject);
         }

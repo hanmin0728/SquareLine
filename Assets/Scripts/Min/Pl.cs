@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Pl : MonoBehaviour
 {
     [SerializeField]
@@ -25,6 +26,7 @@ public class Pl : MonoBehaviour
    
     public void Heal(int amount)
     {
+        FloatingManager.instance.TextMeshFloating($"hp {amount}회복", Color.red, gameObject.transform);
         curHp += amount;
         if (curHp >= maxHp)
         {
@@ -32,8 +34,14 @@ public class Pl : MonoBehaviour
         }
         heartSystem.Heart(curHp);
     }
+
+
     public void Damage(int damage)
     {
+        if(gameObject.layer == LayerMask.NameToLayer("Shiled")) {
+        
+            return;
+        }
         curHp -= damage;
         Instantiate(bloodParticle, transform.position, Quaternion.identity);
         camManager.SetCamShake(1.5f,3f);
@@ -47,9 +55,17 @@ public class Pl : MonoBehaviour
         }
         heartSystem.Heart(curHp);
     }
+    public RectTransform RetryButton;
+
     public void Dead()
     {
+
         print("죽음");
+        GameManager.TimeScale = 0;
+        print("게임매니저 타임스케일값 = "  + GameManager.TimeScale);
+        RetryButton.anchoredPosition = Vector2.zero;
+
+
     }
     public void Mujuck()
     {

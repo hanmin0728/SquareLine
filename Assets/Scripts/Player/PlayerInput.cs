@@ -13,6 +13,15 @@ public class PlayerInput : MonoBehaviour
 
     private void Update() {
 
+        print(GameManager.TimeScale);
+        if(GameManager.TimeScale <= 0) {
+            moveX = 0;
+            isJump = false;
+            isMouse = false;
+            isDown = false;
+            print("타임스케일 0");
+            return;
+        }
         moveX = Input.GetAxisRaw("Horizontal");
         isJump = Input.GetKeyDown(KeyCode.Space);
         isMouse = Input.GetMouseButtonDown(0);

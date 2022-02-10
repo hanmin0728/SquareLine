@@ -7,7 +7,8 @@ public class SpeedPotion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        { 
+        {
+            FloatingManager.instance.TextMeshFloating("속도증가!", Color.cyan);
             StartCoroutine(SpeedUp(collision));
             Destroy(gameObject);
         }

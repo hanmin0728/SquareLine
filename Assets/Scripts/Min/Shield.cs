@@ -10,6 +10,8 @@ public class Shield : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            FloatingManager.instance.TextMeshFloating("¹«Àû5ÃÊ!", Color.green, gameObject.transform);
+
             StartCoroutine(Invincibility(collision));
         }   
     }

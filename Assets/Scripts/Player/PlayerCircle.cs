@@ -18,8 +18,13 @@ public class PlayerCircle : MonoBehaviour
         if (collider2D != null) {
 
             print("°¨Áö");
-            GameManager.TimeScale = 0.5f;
-        } else GameManager.TimeScale = 1f;
+
+
+            GameManager.TimeScale = 0.4f;
+        } else if(collider2D == null) {
+            GameManager.TimeScale = 1;
+        }
+           
 
     }
 }

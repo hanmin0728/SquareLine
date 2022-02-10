@@ -9,11 +9,28 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private Transform player;
     public Transform Player { get { return player; } }
 
-    private float timeScale = 1;
+    private float timeScale = 1f;
 
-    public static float TimeScale { get { return Instance.timeScale; } set { Instance.timeScale = value; } }
+    public static float TimeScale {
+        get {
+            if (Instance != null) {
+                return Instance.timeScale;
+            } else {
+                return 0f;
+            }
+
+        }
+        set {
+            Instance.timeScale = Mathf.Clamp(value, 0, 1);
+        }
+    }
+
+    private void Awake() {
+
+    }
     void Start()
     {
+
         MaxPosition = new Vector2(15f, 9f);
         MinPosition = new Vector2(-15f, -9f);
     }

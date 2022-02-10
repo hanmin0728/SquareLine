@@ -13,6 +13,7 @@ public class previewSigh : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
     }
 
+    
     //시리얼라이즈는 매니저로?
     [Serializable]
     public class SignColor {
@@ -67,11 +68,18 @@ public class previewSigh : MonoBehaviour {
 
         gameObject.SetActive(false);
 
+        //트루가되면 생성하거나
+
+        //이걸 범위표시에서 생성하게 하려면 어케 할까?
+
+
         //불로 하는방법이랑 함수로 이걸 받아가지고 이걸하는방법
     }
 
 
     private void OnDisable() {
+
+        //펄스가 될떄 생성하거나
         PoolManager.ReturnToPool(gameObject);
 
     }

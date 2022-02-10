@@ -15,6 +15,8 @@ public class TestMeshProText : MonoBehaviour {
     private void OnEnable() {
         text = GetComponent<TextMeshProUGUI>();
 
+        //print("텍스트의 컬러는?" + text.color);
+
         
         alpha = text.color;
 
@@ -26,6 +28,8 @@ public class TestMeshProText : MonoBehaviour {
         gameObject.SetActive(false);
     }
     private void Update() {
+        alpha = text.color;
+        //print("알파의 컬러는?" + alpha);
         transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0));
         alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed); //a에서 b까지 , 시간동안
         text.color = alpha;

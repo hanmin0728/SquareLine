@@ -20,7 +20,9 @@ public class RingMove : MonoBehaviour {
 
         RimgMovePosSet();
     }
-
+    public void RingMoveZero() {
+        currentDestination = Vector2.zero;
+    }
     public void RimgMovePosSet() {
         Vector3 originPos = transform.position;
         endPos1.Set(originPos.x + horizontalDistance, originPos.y + verticalDistance, originPos.z);
