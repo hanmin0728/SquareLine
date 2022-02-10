@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
+    [SerializeField] private string layerName;
+    //[SerializeField] private LayerMask layer;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -13,11 +15,13 @@ public class Shield : MonoBehaviour
     }
     IEnumerator Invincibility(Collider2D collision)
     {
-        collision.GetComponent<PolygonCollider2D>().enabled = false;
+        collision.gameObject.layer = LayerMask.NameToLayer(layerName);
+        print(collision.gameObject.layer);
         print("公利");
-        yield return new WaitForSeconds(3f);
-        collision.GetComponent<PolygonCollider2D>().enabled = true;
-        print("公利 秦力");
+        collision.GetComponent<Pl>().Mujuck();
+        Destroy(gameObject);
+        yield return null;
 
+        print("公利 秦力");
     }
 }

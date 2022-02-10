@@ -9,6 +9,9 @@ public class Pl : MonoBehaviour
     private HeartSystem heartSystem;
     [SerializeField]
     private GameObject bloodParticle;
+    [SerializeField] 
+    private string PlayerlayerName;
+
     int maxHp = 5;
     private int curHp = 5;
     private void Start()
@@ -17,9 +20,7 @@ public class Pl : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.position.y < -15f)
-        {
-        }
+       
     }
    
     public void Heal(int amount)
@@ -35,7 +36,7 @@ public class Pl : MonoBehaviour
     {
         curHp -= damage;
         Instantiate(bloodParticle, transform.position, Quaternion.identity);
-        camManager.SetCamShake(1.5f);
+        camManager.SetCamShake(1.5f,3f);
         if (curHp > maxHp)
         {
             curHp = maxHp;
@@ -49,5 +50,15 @@ public class Pl : MonoBehaviour
     public void Dead()
     {
         print("Á×À½");
+    }
+    public void Mujuck()
+    {
+        StartCoroutine(Invin());
+    }
+    public IEnumerator Invin()
+    {
+        yield return new WaitForSeconds(5f);
+        gameObject.layer = LayerMask.NameToLayer(PlayerlayerName);
+
     }
 }

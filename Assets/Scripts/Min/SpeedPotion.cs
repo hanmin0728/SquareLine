@@ -10,7 +10,6 @@ public class SpeedPotion : MonoBehaviour
         { 
             StartCoroutine(SpeedUp(collision));
             Destroy(gameObject);
-
         }
     }
     IEnumerator SpeedUp(Collider2D collision)

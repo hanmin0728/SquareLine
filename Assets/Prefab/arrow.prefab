@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7229723979367523147}
   - component: {fileID: 7229723979367523146}
   - component: {fileID: 4458402813442450173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1650762451
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d1d441bcf3caf05428bee805533ddc2d, type: 3}
+  m_Sprite: {fileID: -765150924802650856, guid: 44f43fc51efac2a4ea517b888d2cdaf0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,7 +115,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3, y: 0.09}
+    oldSize: {x: 0.56, y: 1.8}
     newSize: {x: 0.56, y: 1.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
