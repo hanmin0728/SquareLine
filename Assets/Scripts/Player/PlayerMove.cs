@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         if ((moveX > 0 && !facingRight) || (moveX < 0 && facingRight))
             Flip();
 
-        print(moveX);
+        //print(moveX);
         //print(grappling.isAttach);
         if (grappling.isAttach) //아 붙은 상태를 불로도 할수있구나 그냥 조건문이 답이네 반복문도 딕셔너리도 쓸수있을때니까
             rigid.AddForce(new Vector2(moveX * hookMoveSpeed * GameManager.TimeScale, 0));

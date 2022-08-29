@@ -13,13 +13,13 @@ public class PlayerInput : MonoBehaviour
 
     private void Update() {
 
-        print(GameManager.TimeScale);
+        //print(GameManager.TimeScale);
         if(GameManager.TimeScale <= 0) {
             moveX = 0;
             isJump = false;
             isMouse = false;
             isDown = false;
-            print("타임스케일 0");
+            //print("타임스케일 0");
             return;
         }
         moveX = Input.GetAxisRaw("Horizontal");

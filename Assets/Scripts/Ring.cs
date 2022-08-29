@@ -23,7 +23,6 @@ public class Ring : MonoBehaviour
         grappling = GameObject.Find("Player").GetComponent<GrapplingHook>();
         joint2D = GetComponent<DistanceJoint2D>();
 
-
     }
 
     //풀매니저 겟아이템도 좋구만 풀된걸가져오는
@@ -31,6 +30,12 @@ public class Ring : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.CompareTag("Ring")) {
+            if (collision.GetComponent<RingMove>().IsUsed)
+            {
+                return;
+            }
+            collision.GetComponent<RingMove>().IsUsed = true;
+            GameManager.Instance.ScoreManager.AddScore(5);
 
             SoundManager.instance.PlaySE("hook");
             playerPosition = grappling.transform.position; //플레이어위치

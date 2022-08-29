@@ -19,18 +19,15 @@ public class ScoreManager : MonoBehaviour
         StartCoroutine(ScoreAdd());
         
     }
-
+ 
     IEnumerator ScoreAdd() {
         while(true) {
             if(GameManager.TimeScale <=0) {
                 yield break ; 
             }
-
             AddScore(10);
             yield return new WaitForSeconds(3f);
         }
-
-
     }
 
     
@@ -39,7 +36,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void UpdateScore(int score) {
-        text.text =  score.ToString() + "socre";
+        text.text =  score.ToString() + " Score";
         PlayerPrefs.SetInt("score", addScore);
     }
     public void AddScore(int amount) {

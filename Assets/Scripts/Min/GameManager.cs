@@ -11,6 +11,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private float timeScale = 1f;
 
+    public ScoreManager ScoreManager { get { return scoreManager; } set { scoreManager = value; } }
+    [SerializeField]
+    private ScoreManager scoreManager;
+
     public static float TimeScale {
         get {
             if (Instance != null) {
